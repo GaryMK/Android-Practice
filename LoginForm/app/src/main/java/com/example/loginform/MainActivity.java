@@ -64,6 +64,21 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onClick (View v){
+
+                CustomDialog customDialog = new CustomDialog(MainActivity.this, new CustomDialog.OnCustomDialogListener() {
+                    @Override
+                    public void btnConfirmLicenseClicked(boolean isConfirm) {
+                        if (isConfirm) {
+                            ToastShow("感谢您成为我们的新用户。");
+                        }
+                        else {
+                            ToastShow("只有接受用户协议，才能注册新用户。");
+                        }
+                    }
+                });
+                customDialog.show();
+
+                /*
                 AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
                 alert.setTitle("用户协议确认");
                 alert.setIcon(R.drawable.googleplay);
@@ -85,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 alert.show();
+                 */
             }
         });
     }

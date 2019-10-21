@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="8"
+        android:editable="false"
         android:ems="10"
+        android:focusable="false"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:text="@string/TxtUserLicense" />
