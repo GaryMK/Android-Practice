@@ -2,4 +2,5 @@
     <string name="app_name">Messager</string>
     <string name="hint">Enter a Message</string>
     <string name="send">Send Message</string>
+    <string name="other">Other App</string>
 </resources>

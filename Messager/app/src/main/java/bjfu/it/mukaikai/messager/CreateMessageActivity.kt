@@ -6,26 +6,42 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_create_message.*
 
 
-class CreateMessageActivity : AppCompatActivity() {
+class CreateMessageActivity : AppCompatActivity(),View.OnClickListener {
     companion object {
-        val MESSAGE_KEY:String = "bjfu.it.mukaikai.messager"
+        const val MESSAGE_KEY:String = "bjfu.it.mukaikai.messager"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_message)
-        val button:Button = findViewById(R.id.button)
+        var button:Button = findViewById(R.id.button)
+        var editText = findViewById<EditText>(R.id.input)
         button.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                var editText = findViewById<EditText>(R.id.input)
-                var message:String = editText.getText().toString()
                 val intent = Intent()
+                var message:String = editText.getText().toString()
                 intent.setClass(this@CreateMessageActivity, ReceiveMessageActivity::class.java)
-                intent.putExtra(MESSAGE_KEY,message)
+                intent.putExtra(MESSAGE_KEY, message)
                 startActivity(intent)
             }
         })
+        other.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        when(v?.id) {
+            R.id.other -> {
+                var editText = findViewById<EditText>(R.id.input)
+                var message:String = editText.getText().toString()
+                var intent = Intent()
+                intent.action = Intent.ACTION_SEND
+                intent.setType("text/plain")
+                intent.putExtra(Intent.EXTRA_TEXT, message)
+                startActivity(intent)
+            }
+        }
     }
 }
