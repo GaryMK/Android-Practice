@@ -40,7 +40,10 @@ class CreateMessageActivity : AppCompatActivity(),View.OnClickListener {
                 intent.action = Intent.ACTION_SEND
                 intent.setType("text/plain")
                 intent.putExtra(Intent.EXTRA_TEXT, message)
-                startActivity(intent)
+//                startActivity(intent)
+                var chooserTitle:String = getString(R.string.choser)
+                var chosenIntent:Intent = Intent.createChooser(intent, chooserTitle)
+                startActivity(chosenIntent)
             }
         }
     }

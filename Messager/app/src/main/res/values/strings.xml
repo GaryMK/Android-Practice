@@ -3,4 +3,5 @@
     <string name="hint">Enter a Message</string>
     <string name="send">Send Message</string>
     <string name="other">Other App</string>
+    <string name="choser">Send with other app</string>
 </resources>
