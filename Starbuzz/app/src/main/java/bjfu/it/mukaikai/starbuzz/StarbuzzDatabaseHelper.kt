@@ -20,7 +20,7 @@ class StarbuzzDatabaseHelper(context: Context?) :
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db?.execSQL("CREATE TABLE DRINK (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+        db?.execSQL("CREATE TABLE DRINK (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "NAME TEXT,"
             + "DESCRIPTION TEXT,"
             + "IMAGE_RESOURCE_ID INTEGER);"

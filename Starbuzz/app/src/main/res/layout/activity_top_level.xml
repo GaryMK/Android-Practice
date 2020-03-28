@@ -15,6 +15,18 @@
         android:id="@+id/list_options"
         android:entries="@array/options"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/favorites"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <ListView
+        android:id="@+id/list_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
