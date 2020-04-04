@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="defualt">定位中</string>
     <string name="city_name_str">%s&#062;</string>
     <string name="temp_str">%s℃</string>
     <string name="wd_str">风向：%s</string>

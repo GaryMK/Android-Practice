@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import bjfu.it.mukaikai.weather.bean.CityInfoWeather
+import bjfu.it.mukaikai.weather.bean.IPSee
 import bjfu.it.mukaikai.weather.bean.SKWeather
 import bjfu.it.mukaikai.weather.network.ApiService
 import bjfu.it.mukaikai.weather.network.RetrofitManager
@@ -21,7 +22,7 @@ class WeatherActivity : AppCompatActivity() {
 
     companion object {
         const val HOST_WEATHER = "http://www.weather.com.cn"
-        var cityId: String = "0"
+        var cityId: String = "";
         val apiService: ApiService? = RetrofitManager.instance?.getRetrofit(HOST_WEATHER)?.create(ApiService::class.java)
     }
 
@@ -42,8 +43,29 @@ class WeatherActivity : AppCompatActivity() {
             var intent = Intent( this@WeatherActivity, CityListActivity::class.java)
             startActivityForResult(intent, CityListActivity.CITY_ID_RESULT_CODE)
         }
-        refresh(CityHelper.getDefaultCityId())
+        val ipSee: String = "https://ip.seeip.org"
+        var IPapiService: ApiService? = RetrofitManager.instance?.getRetrofit(ipSee)?.create(ApiService::class.java)
+        var ipInfo: Call<IPSee?>? = IPapiService?.getIP()
+        ipInfo?.enqueue(object : Callback<IPSee?>{
+            override fun onFailure(call: Call<IPSee?>, t: Throwable) {
+                Toast.makeText(this@WeatherActivity,"定位失败", Toast.LENGTH_LONG).show()
+                refresh(CityHelper.getDefaultCityId())
+            }
 
+            override fun onResponse(call: Call<IPSee?>, response: Response<IPSee?>) {
+                var response = response.body()
+                var cityName: String? = response?.city
+                var cityList = CityHelper.getInstance().cityNameEnList
+                var cityPosition: Int = 0;
+                for (index in cityList.indices) {
+                    if (cityList.get(index) == cityName) {
+                        cityPosition = index
+                        break;
+                    }
+                }
+                refresh(CityHelper.getInstance().cityIdList.get(cityPosition))
+            }
+        })
     }
 
     private fun refresh(cityId: String) {
@@ -71,6 +93,7 @@ class WeatherActivity : AppCompatActivity() {
                         ws.text = getString(R.string.ws_str, skWeather?.weatherinfo?.WS)
                         sd.text = getString(R.string.sd_str, skWeather?.weatherinfo?.SD)
                         ap.text = getString(R.string.ap_str, skWeather?.weatherinfo?.AP)
+                        WeatherActivity.cityId = cityId
                     }
 
                     override fun onFailure(

@@ -1,6 +1,7 @@
 package bjfu.it.mukaikai.weather.network
 
 import bjfu.it.mukaikai.weather.bean.CityInfoWeather
+import bjfu.it.mukaikai.weather.bean.IPSee
 import bjfu.it.mukaikai.weather.bean.SKWeather
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,4 +16,7 @@ interface ApiService {
 
     @GET("/data/sk/{cityId}.html")
     fun getSKWeather(@Path("cityId") cityId: String?): Call<SKWeather?>?
+
+    @GET("/geoip")
+    fun getIP(): Call<IPSee?>?
 }
