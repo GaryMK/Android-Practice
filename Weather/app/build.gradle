@@ -16,15 +16,72 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility "1.8"
+        targetCompatibility "1.8"
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'key'
+            keyPassword '123456789'
+            storeFile file('../release.keystore')
+            storePassword '123456789'
+        }
     }
 
     buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
         release {
-            minifyEnabled false
+            // 资源缩减优化
+            shrinkResources true
+            // 代码缩减优化
+            minifyEnabled true
+            // 混淆规则
+            /*
+                混淆反解原代码
+                retrace mapping.txt stacktrace.txt 命令
+                retrace:ANDROID_HOME/sdk/tools/proguard/bin/retrace.sh
+             */
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 签名配置信息
+             signingConfig signingConfigs.config
+            // 是否能调试
+            debuggable false
         }
+        qa {
+            initWith(release)
+            // 是否能调试
+            debuggable true
+        }
+        debug {
+            // 资源缩减优化
+            shrinkResources false
+            // 代码缩减优化
+            minifyEnabled false
+            // 是否能调试
+            debuggable true
+        }
+    }
+
+    lintOptions {
+        // Turns off checks for the issue IDs you specify.
+        disable 'MissingPermission', 'TypographyFractions', 'TypographyQuotes'
+        // Turns on checks for the issue IDs you specify. These checks are in
+        // addition to the default lint checks.
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled', 'NewApi'
+        // To enable checks for only a subset of issue IDs and ignore all other
+        // list the issue IDs with the 'check' property instead. This property
+        // any issue IDs you enable or disable using the properties above.
+        check 'NewApi', 'InlinedApi'
+        // If set to true, turns off analysis progress reporting by lint.
+        quiet true
+        // If set to true (default), stops the build if errors are found.
+        abortOnError false
+        // if true, only report errors.
+        ignoreWarnings true
     }
 
 }
@@ -41,4 +98,6 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 }

@@ -18,7 +18,7 @@
         android:id="@+id/temp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textSize="18sp"
         tools:text="%s("/>
 
@@ -26,7 +26,7 @@
         android:id="@+id/wethear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textSize="18sp"
         tools:text="阴天" />
 
@@ -40,14 +40,14 @@
         android:id="@+id/ws"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         tools:text="%s>" />
 
     <TextView
         android:id="@+id/blank1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         tools:text=" "/>
 
     <TextView
@@ -61,14 +61,14 @@
         android:id="@+id/ap"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         tools:text="气压：%S" />
 
     <TextView
         android:id="@+id/blank2"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         tools:text=" " />
 
 </GridLayout>

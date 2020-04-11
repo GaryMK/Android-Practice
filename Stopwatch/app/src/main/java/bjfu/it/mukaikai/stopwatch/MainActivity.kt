@@ -1,16 +1,13 @@
 package bjfu.it.mukaikai.stopwatch
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.PersistableBundle
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import java.util.*
-import kotlin.math.log
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -35,6 +32,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btnStop.setOnClickListener(this)
         btnReset.setOnClickListener(this)
         runTimer()
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(view: View) {
+                println("d")
+            }
+        }
+        textView.setOnClickListener(View.OnClickListener { println() })
     }
     fun runTimer() {
         var handler:Handler = object : Handler() {}

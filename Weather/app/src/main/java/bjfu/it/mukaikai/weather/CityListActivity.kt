@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import bjfu.it.mukaikai.weather.utils.CityHelper
+import bjfu.it.mukaikai.weather.utils.LeakCanaryUtils
 import kotlinx.android.synthetic.main.activity_city_list.*
 
 class CityListActivity : AppCompatActivity() {
@@ -40,6 +41,8 @@ class CityListActivity : AppCompatActivity() {
                 }
             }
         )
+
+        LeakCanaryUtils.addContext(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
